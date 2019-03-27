@@ -1,0 +1,77 @@
+.slider_container{
+  margin:0 0 0.5rem 0;
+  padding:0;
+  width:25rem;
+  height:1rem;
+  line-height: 1rem;
+  white-space:nowrap;
+  position: relative
+}
+.slider_container:hover .edit_button{
+  display:block;
+}
+.slider_label, .slider_value{
+  display: inline-block;
+  height:1rem;
+  line-height: 1rem;
+  vertical-align: middle;
+}
+.slider_label{
+  margin-left:1rem;
+  width:1.6rem;
+  text-align:right;
+  padding:0.2rem 0;
+}
+.slider_value{
+  text-align: left;
+  white-space: nowrap;
+  cursor:text;
+  display:inline-block;
+  padding:0.2rem;
+  position: relative;
+  outline:none;
+  font-family:Inconsolata, 'Courier New', Courier, monospace;
+  font-size:1.2rem;
+}
+.slider_value:focus{
+  color:#333;
+  background:rgba(255, 255, 255, 0.65);
+}
+.edit_button{
+  display: none;
+  position: absolute;
+  cursor:pointer;
+  top:0;
+  right:0.3rem;
+  width:1.2rem;
+}
+.ui-slider{
+  width:16rem;
+  height:1rem;
+  position: relative;
+  display: inline-block;
+  margin:0 1rem 0 0;
+  vertical-align: middle;
+}
+.ui-slider-handle{
+  z-index: 5;
+  width:0.95rem;
+  height:0.95rem;
+  background:#aaa;
+  display:block;
+  position: absolute;
+  outline:none;
+  cursor:ew-resize;
+  border-radius:0.2rem;
+  border:1px solid rgba(255, 255, 255, 0.8);
+}
+.ui-slider:after{
+  content: ' ';
+  z-index: 1;
+  position: absolute;
+  display: block;
+  top:50%;
+  left:0;
+  width:17rem;
+  border-bottom:1px solid rgba(255,255,255,0.5);
+}

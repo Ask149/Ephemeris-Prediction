@@ -1,0 +1,188 @@
+<!-- {% extends "base.html" %} -->
+{% block body %}
+<!-- {% include "navbar.html" %} -->
+    <!-- <link rel="apple-touch-icon" sizes="57x57" href="https://orbitalmechanics.info/images/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://orbitalmechanics.info/images/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://orbitalmechanics.info/images/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://orbitalmechanics.info/images/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://orbitalmechanics.info/images/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://orbitalmechanics.info/images/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://orbitalmechanics.info/images/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://orbitalmechanics.info/images/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://orbitalmechanics.info/images/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://orbitalmechanics.info/images/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://orbitalmechanics.info/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://orbitalmechanics.info/images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://orbitalmechanics.info/images/favicon-16x16.png">
+    <link rel="manifest" href="https://orbitalmechanics.info/images/manifest.json"> -->
+
+
+    <title>SIH'19 Satellite Ephemeris Prediction - ISRO</title>
+    <link href="static/css/jquery-ui.css" rel="stylesheet" media="all">
+    <link href="static/css/mathbox.css" rel="stylesheet" media="all">
+    <link href="static/css/orbital.css" rel="stylesheet" media="all">
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+<title>SIH 2019</title>
+<!-- <section class="hero is-primary is-bold is-small">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div id="settings" class="settings-box">
+        <div class="settings-area">    
+          <h1 class="title">Visualization</h1>         
+          <div class="field">
+            <p class="control has-icons-left">
+              <input id="settings-user" class="input is-success" type="text" placeholder="{{user.username}}" readonly="readonly">
+              <span class="icon is-small is-left">
+                <i class="fa fa-user"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input id="settings-mail" class="input is-success" type="text" placeholder="{{user.email}}">
+              <span class="icon is-small is-left">
+                <i class="fa fa-envelope"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input id="settings-pass" class="input" type="password" placeholder="&#x2022&#x2022&#x2022&#x2022&#x2022">
+              <span class="icon is-small is-left">
+                <i class="fa fa-lock"></i>
+              </span>
+            </p>
+          </div>
+          <br>
+          <a id="save" class="form-button button is-primary is-inverted is-outlined">
+            <span>Save</span>
+          </a>
+          <a href="/" class="form-button button is-primary is-inverted is-outlined">
+            <span>Exit</span>
+          </a>
+          <br>
+          <br>
+          <i><a id="feedback" class="feedback"></a></i>
+        </div>
+      </div>    
+    </div>
+  </div>
+</section>
+
+ -->
+  <body data-gr-c-s-loaded="true" style="height: 100%; margin: 0px; padding: 0px; position: relative; cursor: move;">
+    <div id="content">
+      <h1 id="main_heading">
+        <a href="/">SIH 2019</a>
+        <div id="global_controls">
+          <!-- <div class="global_toggle" id="play"></div> -->
+          <div class="global_toggle" id="labels_toggle"></div>
+          <!-- <div class="global_toggle" id="sound_toggle"></div> -->
+          <div class="global_toggle" id="restart"></div>
+          <!-- <div class="global_toggle selected" id="help_toggle"></div> -->
+        </div> 
+
+      </h1>
+      <!--nav>
+        <a class="selected" href="https://orbitalmechanics.info/">Simulator</a><a href="https://orbitalmechanics.info/about">About</a>
+      </nav-->
+
+      <!--div id="time_container">
+        <span class="time_multiplier selected" id="time_multiplier_1" data-s="1">×<br>1</span><span class="time_multiplier" id="time_multiplier_2" data-s="2">×<br>2</span><span class="time_multiplier" id="time_multiplier_10" data-s="10">×<br>10</span><span class="time_multiplier" id="time_multiplier_100" data-s="100">×<br>100</span><span class="time_multiplier" id="time_multiplier_1000" data-s="1000">×<br>1000</span><span>dt=</span><span id="dt">0.017s</span>
+
+
+
+      </div-->
+      <div id="time_container">
+                                  <button id="navigate" onclick="callCreateOrbit()">Navigate</button>
+
+      </div>
+
+      <div id="orbits" style="visibility:hidden;">
+        <div class="orbit_name_container">
+          <input id="orbit_name" placeholder="enter orbit name">
+          <div class="add_button" id="add_orbit">add orbit</div>
+          <div class="help_container">
+            <div class="help_padding">
+              <h3> General</h3>
+              <div class="icon large"><img src="../static/js/play.svg"></div>Start/stop time. When paused the Earth does not rotate and launch simulations do not run.<br>
+              <div class="icon large"><img src="../static/js/label.svg"></div>Toggle coordinate system axis and equatorial plane visualisations.<br>
+              <div class="icon large"><img src="../static/js/sound.svg"></div>Mute/enable burn and crash sounds.<br>
+              <div class="icon large"><img src="../static/js/restart.svg"></div>Clear all orbits and launches.<br>
+              × n buttons change the "speed" of time to n-times real-time speed.
+              <br><br>
+              <div>
+                <div class="column">
+                  <h3>Orbits</h3>
+                  To visualise an orbit enter a name for it and click "add orbit". Use the sliders to adjust the elements of the orbit. You can also type in values after clicking the corresponding <div class="icon"><img src="../static/js/edit.svg"></div> icon or the numerical value of the parameter.<br><br>
+                  <div class="icon large"><img src="../static/js/launch.svg"></div>Drag this icon into a launch to start a simulation with the current orbital parameters.<br><br>
+                  <div class="icon large"><img src="../static/js/hide.svg"></div>Click to toggle the display of the orbital plane and angle visualisations.<br><br>
+                  <div class="icon large"><img src="../static/js/view_plane.svg"></div>Click to toggle only the orbital plane visualisation.
+                </div>
+                <div class="column second">
+                  <h3>Launches</h3>
+                  To add a launch simulation enter a name for it and click "add orbit". Use the sliders to adjust latitude (φ) and longitude (λ) of the launch as well as the longitude of the ascending node (Ω). You can also type in values after clicking the corresponding <div class="icon"><img src="../static/js/edit.svg"></div> icon or the numerical value of the parameter. You can select the latitude and longitude of a few well known launch facilities by clicking on the name of the launch.<br><br>
+                  <div class="icon large"><img src="../static/js/burn.svg"></div>Toggles the view of the burn profile editors.<br><br>
+                  <div class="icon large"><img src="../static/js/follow.svg"></div>Selecting this icon causes the camera to follow the launched rocket as it moves along the trajectory.      
+                </div>
+              </div><br>
+              <h3>Burns</h3>
+              Select different components of the thrust vector by clicking on the corresponding tab. The radial component is always in the direction away from the center of the Earth. The normal component is  normal to the initial orbital plane set through the latitude, longitude and the longitude of the ascending node if "trajectory lock" is shown. If this button is toggled to "trajectory lock" then the normal direction is in the direction of the instantaneous angular momentum. The tangential component is orthogonal to the radial and normal components. Click "add point" to add a point to the burn graph. Click "clear points" to remove all points for the currently selected graph. Double click on a point to move it using the arrow keys on the keyboard for fine tuning. Click "fire" to start the simulation and apply the burn profile. You can edit the graphs while the simulation is running. All changes are live and take effect immediately. Click "fire" again to stop the burn. Clicking "fire" yet again will start playing the burn from the start (use the general pause button if you want to pause everything).
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--div id="launches">
+        <div class="orbit_name_container">
+          <input id="launch_name" placeholder="enter launch name">
+          <div class="add_button" id="add_launch">add launch</div>
+        </div>
+      </div-->
+    </div>
+    
+    
+    <div class="hidden" id="share_url_container">
+      <div>Copy and paste the url below to share this launch:</div>
+      <input type="text" id="share_url_input"><div id="close_share_url" class="close">×</div>
+    </div>
+    <div id="copyright">© <a href="https://graybits.biz/">GradientAscent</a></div>
+  
+<div class="mathbox-overlays"></div><canvas width="1351" height="522" style="display: block; width: 1351px; height: 522px; margin-left: 0px; margin-top: 0px; visibility: visible;"></canvas>
+
+
+</body>
+
+
+
+
+
+
+{% endblock %}
+{% block scripts %}
+<script src="../static/js/scripts.js"></script>
+<script src="../static/js/jquery-2.1.4.min.js"></script>
+<script src="../static/js/jquery-2.1.4.min.js"></script>
+<script src="../static/js/jquery-ui.min.js"></script>
+<script src="../static/js/jquery.mousewheel.min.js"></script>
+<script src="../static/js/jquery.ui.touch-punch.min.js"></script>
+<script src="../static/js/mathbox-bundle.min.js"></script>
+<script src="../static/js/orbital.js"></script> 
+
+
+   <!--  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-71855604-1', 'auto');
+      ga('send', 'pageview');
+
+    </script> -->
+
+
+{% endblock %}
